@@ -104,14 +104,14 @@ bool is_empty(QUEUE* q) {
     return false;
 }
 
-void show_path(STATION* st) {
-  STATION* path[max_path_station] = {0};
-  int count_st = 0;
-  find_path(&st[0], &st[9], path, &count_st);
-  printf("From [%s] to [%s]: count_st = %hhd\n", st[0].name, st[9].name,
-         count_st);
-  for (int i = 0; i < count_st; ++i) printf("[%s] ", path[i]->name);
-}
+// void show_path(STATION* st) {
+//   STATION* path[max_path_station] = {0};
+//   int count_st = 0;
+//   find_path(&st[0], &st[9], path, &count_st);
+//   printf("From [%s] to [%s]: count_st = %hhd\n", st[0].name, st[9].name,
+//          count_st);
+//   for (int i = 0; i < count_st; ++i) printf("[%s] ", path[i]->name);
+// }
 
 int main(void) {
   set_station_links(&st[0], st[0].count_links, &st[1], &st[2]);
@@ -125,7 +125,12 @@ int main(void) {
   set_station_links(&st[8], st[8].count_links, &st[5], &st[6], &st[7], &st[9]);
   set_station_links(&st[9], st[9].count_links, &st[8]);
 
-  show_path(st);
+  STATION* path[max_path_station] = {0};
+  int count_st = 0;
+  find_path(&st[0], &st[9], path, &count_st);
 
+  // show_path(st);
+
+  // __ASSERT_TESTS__
   return 0;
 }
