@@ -3,7 +3,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-enum { max_st_count = 10, name_length = 50, total_links = 50, max_path_station = 100 };
+enum {
+  max_st_count = 10,
+  name_length = 50,
+  total_links = 50,
+  max_path_station = 100
+};
 
 typedef struct tag_station {
   char name[name_length];
@@ -17,19 +22,6 @@ typedef struct queue {
   int front;
   int rear;
 } QUEUE;
-
-STATION st[max_st_count] = {
-    {"St #1", .count_links = 2, .fl_reserved = -1},
-    {"St #2", .count_links = 3, .fl_reserved = -1},
-    {"St #3", .count_links = 2, .fl_reserved = -1},
-    {"St #4", .count_links = 2, .fl_reserved = -1},
-    {"St #5", .count_links = 2, .fl_reserved = -1},
-    {"St #6", .count_links = 4, .fl_reserved = -1},
-    {"St #7", .count_links = 2, .fl_reserved = -1},
-    {"St #8", .count_links = 2, .fl_reserved = -1},
-    {"St #9", .count_links = 4, .fl_reserved = -1},
-    {"St #10", .count_links = 1, .fl_reserved = -1},
-};
 
 void set_station_links(STATION* st, int count_links, ...);
 void show_path(STATION* st);
@@ -47,10 +39,12 @@ void set_station_links(STATION* st, int count_links, ...) {
 }
 
 void find_path(STATION* from, STATION* to, STATION* path[], int* count_st) {
-  for (size_t i = 0; i < sizeof(st) / sizeof(*st); ++i) st[i].fl_reserved = -1;
-  QUEUE* q = create_queue();
-  from->fl_reserved = 0;
   STATION* current;
+  QUEUE* q = create_queue();
+  STATION* st_q[max_st_count];
+  from->fl_reserved = 0;
+  int k = 0;
+  st_q[k++] = from;
   enqueue(q, from);
   while (!is_empty(q)) {
     current = dequeue(q);
@@ -58,6 +52,7 @@ void find_path(STATION* from, STATION* to, STATION* path[], int* count_st) {
     for (int i = 0; i < current->count_links; ++i) {
       if (current->links[i]->fl_reserved == -1) {
         current->links[i]->fl_reserved = current->fl_reserved + 1;
+        st_q[k++] = current->links[i];
         enqueue(q, current->links[i]);
       }
     }
@@ -73,6 +68,9 @@ void find_path(STATION* from, STATION* to, STATION* path[], int* count_st) {
         break;
       }
     }
+  }
+  for (int i = 0; i < k; i++) {
+    st_q[i]->fl_reserved = -1;
   }
 }
 
@@ -114,6 +112,18 @@ bool is_empty(QUEUE* q) {
 // }
 
 int main(void) {
+  STATION st[max_st_count] = {
+      {"St #1", .count_links = 2, .fl_reserved = -1},
+      {"St #2", .count_links = 3, .fl_reserved = -1},
+      {"St #3", .count_links = 2, .fl_reserved = -1},
+      {"St #4", .count_links = 2, .fl_reserved = -1},
+      {"St #5", .count_links = 2, .fl_reserved = -1},
+      {"St #6", .count_links = 4, .fl_reserved = -1},
+      {"St #7", .count_links = 2, .fl_reserved = -1},
+      {"St #8", .count_links = 2, .fl_reserved = -1},
+      {"St #9", .count_links = 4, .fl_reserved = -1},
+      {"St #10", .count_links = 1, .fl_reserved = -1},
+  };
   set_station_links(&st[0], st[0].count_links, &st[1], &st[2]);
   set_station_links(&st[1], st[1].count_links, &st[0], &st[3], &st[4]);
   set_station_links(&st[2], st[2].count_links, &st[0], &st[5]);
