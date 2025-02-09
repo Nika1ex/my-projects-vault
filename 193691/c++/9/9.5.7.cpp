@@ -8,12 +8,7 @@ using THING = struct {
 };
 
 int compar(const void* a, const void* b) {
-  const THING* A = (const THING*)a;
-  const THING* B = (const THING*)b;
-  if (A->weight > B->weight)
-    return 1;
-  else
-    return -1;
+  return ((const THING*)a)->weight - ((const THING*)b)->weight;
 }
 
 int main() {

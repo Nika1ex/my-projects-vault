@@ -6,12 +6,7 @@ using THING = struct {
 };
 
 int compar(const void* a, const void* b) {
-  const THING* A = (const THING*)a;
-  const THING* B = (const THING*)b;
-  if (B->weight > A->weight)
-    return 1;
-  else
-    return -1;
+  return ((const THING*)b)->weight - ((const THING*)a)->weight;
 }
 
 int main() {
