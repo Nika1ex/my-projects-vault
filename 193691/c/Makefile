@@ -12,7 +12,7 @@ delete:
 	@rm -rf *.o $(TARGET) 
 
 clang-format:
-	clang-format -i *.c
+	clang-format -i *.c */*.c
 
 valgrind:
 	valgrind --tool=memcheck --leak-check=yes ./$(TARGET)

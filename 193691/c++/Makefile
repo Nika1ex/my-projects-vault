@@ -12,7 +12,7 @@ delete:
 	@rm -rf *.o $(TARGET) 
 
 clang-format:
-	clang-format -i *.cpp
+	clang-format -i *.cpp */*.cpp
 
 valgrind:
 	valgrind --tool=memcheck --leak-check=yes ./$(TARGET)
