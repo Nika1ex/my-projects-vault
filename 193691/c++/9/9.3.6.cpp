@@ -9,8 +9,7 @@ int main() {
     std::cin >> data[count++];
     if (getchar() == EOF) break;
   }
-  for (int i = 0; i < count; ++i)
-    std::cout << data[i] << ' ';
+  for (int i = 0; i < count; ++i) std::cout << data[i] << ' ';
   __ASSERT_TESTS__
   return 0;
 }

@@ -135,8 +135,6 @@ int main(void) {
   set_station_links(&st[7], st[7].count_links, &st[4], &st[8]);
   set_station_links(&st[8], st[8].count_links, &st[5], &st[6], &st[7], &st[9]);
   set_station_links(&st[9], st[9].count_links, &st[8]);
-
   show_path(st);
-
   return 0;
 }

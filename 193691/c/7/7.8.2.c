@@ -40,7 +40,7 @@ int main(void) {
       "https://proproprogs.ru/c_base/c_perechisleniya-enum-direktiva-typedef"};
   size_t url_arr_size = sizeof(url_arr) / sizeof(*url_arr);
   for (size_t i = 0; i < url_arr_size; ++i) top = push(top, url_arr[i]);
-  // __ASSERT_TESTS__
+  __ASSERT_TESTS__
   while (top) top = pop(top);
   return 0;
 }

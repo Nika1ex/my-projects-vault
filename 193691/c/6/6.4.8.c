@@ -23,7 +23,6 @@ int main(void) {
 int is_win(char (*arr)[SIZE]) {
   int flag = 3, sum_rows = 0, sum_columns = 0, sum_main_diagonal = 0,
       sum_secondary_diagonal = 0;
-
   for (int i = 0, k = SIZE - 1; i < SIZE && flag != 1 && flag != 2; ++i, --k) {
     sum_rows = 0;
     sum_columns = 0;
@@ -42,6 +41,5 @@ int is_win(char (*arr)[SIZE]) {
              sum_secondary_diagonal == SIZE * 'o')
       flag = 2;
   }
-
   return flag;
 }
