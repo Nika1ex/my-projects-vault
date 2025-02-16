@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #define URL_SIZE 1024
 
 typedef struct tag_obj {

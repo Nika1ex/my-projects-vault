@@ -1,5 +1,4 @@
 #include <stdio.h>
-
 #define SIZE 3
 
 int is_win(char (*arr)[SIZE]);
@@ -8,15 +7,12 @@ int main(void) {
   char pole[SIZE][SIZE] = {0};
   char* ptr_p = &pole[0][0];
   int count = 0;
-
   while (count < SIZE * SIZE && scanf("%hhd", ptr_p) == 1) {
     *ptr_p = (*ptr_p == 1) ? 'x' : (*ptr_p == 2) ? 'o' : *ptr_p;
     ptr_p++;
     count++;
   }
-
   printf("%d", is_win(pole));
-
   return 0;
 }
 
