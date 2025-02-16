@@ -5,17 +5,17 @@ namespace array_alg {
 
 typedef enum { sort_asc, sort_desc } TYPE_SORT;
 
-int compar_asc(const void *a, const void *b) { return *(int *)a - *(int *)b; }
+int compare_asc(const void *a, const void *b) { return *(int *)a - *(int *)b; }
 
-int compar_desc(const void *a, const void *b) { return *(int *)b - *(int *)a; }
+int compare_desc(const void *a, const void *b) { return *(int *)b - *(int *)a; }
 
 void sorted_int(int *ar, size_t len_ar, TYPE_SORT type) {
   switch (type) {
     case (sort_asc):
-      qsort(ar, len_ar, sizeof(int), compar_asc);
+      qsort(ar, len_ar, sizeof(int), compare_asc);
       break;
     case (sort_desc):
-      qsort(ar, len_ar, sizeof(int), compar_desc);
+      qsort(ar, len_ar, sizeof(int), compare_desc);
       break;
   }
 }

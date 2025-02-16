@@ -5,7 +5,7 @@ using THING = struct {
   unsigned int weight;
 };
 
-int compar(const void* a, const void* b) {
+int compare(const void* a, const void* b) {
   return ((const THING*)b)->weight - ((const THING*)a)->weight;
 }
 
@@ -20,7 +20,7 @@ int main() {
   unsigned int max_weight;
   std::cin >> max_weight;
   max_weight *= 1000;
-  qsort(things, things_size, sizeof(THING), compar);
+  qsort(things, things_size, sizeof(THING), compare);
   for (size_t i = 0; i < things_size; ++i)
     if (things[i].weight <= max_weight) {
       max_weight -= things[i].weight;

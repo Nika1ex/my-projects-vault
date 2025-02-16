@@ -7,7 +7,7 @@ using THING = struct {
   double weight;
 };
 
-int compar(const void* a, const void* b) {
+int compare(const void* a, const void* b) {
   return ((const THING*)a)->weight - ((const THING*)b)->weight;
 }
 
@@ -19,7 +19,7 @@ int main() {
     count++;
     if (getchar() == EOF) break;
   }
-  qsort(th, count, sizeof(THING), compar);
+  qsort(th, count, sizeof(THING), compare);
   for (int i = 0; i < count; ++i) std::cout << th[i].name << ' ';
   return 0;
 }
