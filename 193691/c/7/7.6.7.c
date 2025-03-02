@@ -17,7 +17,7 @@ int main(void) {
       ((tm1.hours + tm2.hours) +
        (((tm1.minutes + tm2.minutes) + (tm1.seconds + tm2.seconds) / 60) /
         60)) %
-      60;
+      24;
   printf("%02hhu:%02hhu:%02hhu", tm_sum.hours, tm_sum.minutes, tm_sum.seconds);
   __ASSERT_TESTS__
   return 0;
