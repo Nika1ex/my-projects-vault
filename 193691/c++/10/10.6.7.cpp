@@ -37,7 +37,7 @@ int main(void) {
   st_unique_ptr top;
   for (int i = 1; i <= 7; ++i) push(top, i);
   for (object* node = top.get(); node != NULL; node = node->get_next())
-    std::cout << node->get_data() << " ";
+    std::cout << node->get_data() << ' ';
   __ASSERT_TESTS__
   clear(top.release());
   return 0;
