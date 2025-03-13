@@ -1,8 +1,5 @@
-from math import factorial
+import math
 
-n, k = map(int, input().split())
-if n >= k:
-    c = factorial(n) / (factorial(k) * factorial(n - k))
-    print(int(c))
-else:
-    print("error: n < k")
+a, b = map(int, input().split())
+c = math.sqrt(a * a + b * b)
+print(round(c, 2))
