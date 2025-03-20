@@ -1,0 +1,20 @@
+FROM ubuntu:noble-20250127
+
+RUN apt update && \
+    apt install -y gcc libfcgi-dev spawn-fcgi nginx && \
+    rm -rf /var/lib/apt/lists/* && \
+    useradd -m -s /bin/bash webappuser
+
+USER webappuser 
+WORKDIR /home/webappuser
+COPY ./server/s21_server.c .
+RUN gcc s21_server.c -lfcgi
+
+USER root
+COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
+RUN touch /run/nginx.pid && \
+    chown webappuser /run/nginx.pid /etc/nginx/nginx.conf && \ 
+    chown -R webappuser /var/lib/nginx /var/log/nginx
+
+USER webappuser
+CMD ["bash", "-c", "spawn-fcgi -p 8080 ./a.out & nginx -g 'daemon off;'"]
