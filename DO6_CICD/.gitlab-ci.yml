@@ -1,0 +1,73 @@
+stages:
+  - build
+  - code_style
+  - integration_tests
+  - deploy
+  - notifications
+
+build-job:
+  stage: build
+  script:
+    - cd src/C3_SimpleBashUtils/cat && make s21_cat
+    - cd ../grep && make s21_grep
+  after_script:
+    - echo "$CI_JOB_STATUS" > src/build_result.txt
+  artifacts:
+    paths:
+      - src/C3_SimpleBashUtils/cat/s21_cat
+      - src/C3_SimpleBashUtils/grep/s21_grep
+      - src/build_result.txt
+    expire_in: 30 days
+    when: always
+  
+linter-job:
+  stage: code_style
+  script:
+    - cp materials/linters/.clang-format src/C3_SimpleBashUtils/.clang-format
+    - clang-format --Werror -n --verbose src/C3_SimpleBashUtils/*/*.c src/C3_SimpleBashUtils/*/*.h
+  after_script:
+    - echo "$CI_JOB_STATUS" > src/linter_result.txt
+  artifacts:
+    paths:
+      - src/linter_result.txt
+    expire_in: 30 days
+    when: always
+
+test-job:
+  stage: integration_tests
+  script:
+    - cd src/C3_SimpleBashUtils/cat && make valgrind cppcheck tests
+    - cd ../grep && make valgrind cppcheck tests
+    - bash ../../tests_result.sh
+  after_script:
+    - echo "$CI_JOB_STATUS" > src/tests_result.txt
+  artifacts:
+    paths:
+      - src/tests_result.txt
+    expire_in: 30 days
+    when: always
+
+deploy-job:
+  stage: deploy
+  script:
+    - bash src/deploy.sh
+  when: manual
+  after_script:
+    - echo "$CI_JOB_STATUS" > src/deploy_result.txt
+  artifacts:
+    paths:
+      - src/deploy_result.txt
+    expire_in: 30 days
+    when: always
+
+notify_CI:
+  stage: notifications
+  when: always
+  script:
+    - bash src/tg_bot.sh
+
+notify_CD:
+  stage: notifications
+  needs: ["deploy-job"]
+  script:
+    - bash src/tg_bot.sh

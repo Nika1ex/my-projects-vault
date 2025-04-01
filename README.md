@@ -12,4 +12,6 @@
 
 **DO5_SimpleDocker** - Проект по Docker на Ubuntu 24.04 LTS
 
+**DO6_CICD** - Проект по CI/CD на Ubuntu 22.04 LTS
+
 
