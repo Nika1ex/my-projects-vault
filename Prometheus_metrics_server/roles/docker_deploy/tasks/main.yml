@@ -1,0 +1,58 @@
+---
+# tasks file for roles/docker_deploy
+- name: Install dependencies
+  dnf:
+    name:
+      - python3
+      - python3-pip
+    state: present
+
+- name: Install required Python libraries
+  pip:
+    name:
+      - requests
+    executable: pip3
+
+- name: Create build directory
+  file:
+    path: "{{ build_context }}"
+    state: directory
+    mode: 0755
+
+- name: Copy Dockerfile
+  copy:
+    src: Dockerfile
+    dest: "{{ build_context }}/Dockerfile"
+    mode: 0644
+
+- name: Copy server code
+  copy:
+    src: server.py
+    dest: "{{ build_context }}/server.py"
+    mode: 0644
+
+- name: Build Docker image
+  docker_image:
+    name: "{{ docker_image }}"
+    source: build
+    build:
+      path: "{{ build_context }}"
+    force_source: yes
+
+- name: Run metrics container
+  docker_container:
+    name: "{{ docker_container }}"
+    image: "{{ docker_image }}"
+    state: started
+    restart_policy: unless-stopped
+    ports:
+      - "{{ app_port }}:8080"
+    volumes:
+      - "/etc/localtime:/etc/localtime:ro"
+
+- name: Configure firewall
+  firewalld:
+    port: "{{ app_port }}/tcp"
+    permanent: yes
+    state: enabled
+  notify: Reload firewall

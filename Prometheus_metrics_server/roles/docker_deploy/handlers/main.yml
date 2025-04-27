@@ -1,0 +1,6 @@
+---
+# handlers file for roles/docker_deploy
+- name: Reload firewall
+  systemd:
+    name: firewalld
+    state: reloaded

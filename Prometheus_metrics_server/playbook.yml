@@ -1,0 +1,8 @@
+---
+- name: Deploy prometheus metrics server
+  hosts: alma-server
+  roles:
+    - role: service_deploy
+      tags: service
+    - role: docker_deploy
+      tags: docker

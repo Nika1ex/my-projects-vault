@@ -1,0 +1,4 @@
+---
+# vars file for roles/service_deploy
+app_port: 8080
+app_dir: /opt/prometheus-metrics

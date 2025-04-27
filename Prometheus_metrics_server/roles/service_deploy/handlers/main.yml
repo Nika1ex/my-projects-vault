@@ -1,0 +1,15 @@
+---
+# handlers file for roles/service_deploy
+- name: Reload systemd
+  systemd:
+    daemon_reload: yes
+
+- name: Restart metrics service
+  systemd:
+    name: metrics
+    state: restarted
+
+- name: Reload firewall
+  systemd:
+    name: firewalld
+    state: reloaded

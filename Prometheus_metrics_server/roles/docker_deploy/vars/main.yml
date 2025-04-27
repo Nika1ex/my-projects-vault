@@ -1,0 +1,6 @@
+---
+# vars file for roles/docker_deploy
+app_port: 8080
+docker_image: "prometheus-metrics"
+docker_container: "metrics-server"
+build_context: "/opt/docker-build"
