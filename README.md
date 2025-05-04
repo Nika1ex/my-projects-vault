@@ -8,13 +8,15 @@
 
 **DO2_LinuxNetwork** - Конфигурация сетей Linux на виртуальных машинах Oracle VirtualBox с Ubuntu 20.04 Server LTS
 
+**DO3_LinuxMonitoring_v1.0** - Разработка Bash-скриптов, мониторинг и исследование состояния виртуальной машины Oracle VirtualBox с Ubuntu 20.04 Server LTS в режиме реального времени 
+
 **DO5_SimpleDocker** - Разработка Docker-образа для собственного сервера на C и FastCgi
 
 **DO6_CICD** - Настройка CI/CD для GitLab-репозитория проекта SimpleBashUtils. Сборка, тестирование, развертывание.
 
-## Прочие проекты:
+## Pet-проекты:
 
-**Prometheus_metrics_server** - Разработка HTTP сервера на Python, который экспортирует на 8080 порт Prometheus метрики. Сервис развертывается на виртуальной машине с ОС AlmaLinux как служба systemd, а также в Docker-контейнере, используя систему управления конфигурациями Ansible.
+**Prometheus_metrics_server** - Разработка HTTP сервера на Python, который экспортирует на порт 8080 Prometheus метрики. Сервис развертывается на виртуальной машине с ОС AlmaLinux как служба systemd, а также в Docker-контейнере, используя систему управления конфигурациями Ansible.
 
 ## Задачи онлайн-курсов:
 
